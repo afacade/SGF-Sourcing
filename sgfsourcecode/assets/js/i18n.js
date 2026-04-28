@@ -12,6 +12,7 @@ window.SGF_I18N = {
     'nav.difference': 'Tại Sao Chọn SGF',
     'nav.specs': 'Thông Số',
     'nav.packing': 'Quy Cách Đóng Gói',
+    'nav.tracking': 'Theo Dõi',
     'nav.contact': 'Liên Hệ',
     'nav.cta': 'Yêu Cầu Báo Giá',
 

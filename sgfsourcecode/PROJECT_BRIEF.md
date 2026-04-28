@@ -1,7 +1,7 @@
 # SGF Sourcing — Fresh Coconut Landing Page
 
 **Project brief & single source of truth**
-Last updated: 2026-04-24
+Last updated: 2026-04-26
 
 ---
 
@@ -36,47 +36,50 @@ Two options — confirm before launch:
 ## 2. Brand & visual direction
 
 ### Logo
-- Existing wordmark: **SGFSOURCING** with globe + arrow mark and tagline *"Vietnam Agri · Connecting Markets"*
-- Palette in logo: brown / tan / gold on white
+- Final wordmark: **SGFSOURCING** with globe + dual-arrow ring mark, agricultural rows under the equator, and tagline *"VIETNAM AGRI · CONNECTING MARKETS"*
+- Logo palette: warm browns gradient (Domino → Judge Gray → Graphite) on white — same six-colour family as the site
+- File: `assets/img/sgf-logo.png` (1.5 MB, ~1024×1024) — referenced by every page nav and footer
 
-### Palette — Fresh Heritage (client-chosen, balanced green + brown)
-A balanced 40/60 system: **fresh plant greens** carry the action zones (CTAs, hero, dark anchor bands) while **warm browns** hold the brand foundation (typography, footer, accent dividers). Positions SGF as both a *living agricultural product* and a *trusted heritage exporter* — neither just a tropical beverage brand nor a stuffy supplier.
+### Palette — Variant C: Editorial Heritage (7 tones, magazine-style)
+**Brown family, treated like a magazine spread.** Reads NYT food-section rather than B2B catalogue. The earlier monochromatic Silk-on-Silk experiment compressed the brand into a single tonal field; this variant lifts the page surface to a softer Linen with Porcelain alternating sections, drops card containers entirely (content blocks separate via 1px Silk dividers, not bordered boxes), uses italic Roman-numeral markers on grids (`i.` `ii.` `iii.`), and reserves Graphite for the strongest interventions — body text, primary buttons, dark anchor bands.
 
-#### Greens — fresh plant tones
+#### The seven tones
 | Token | Hex | Name | Usage |
 |---|---|---|---|
-| `--green-leaf` | `#4A8C4F` | Coconut Leaf | **Primary CTAs, logo mark badge, primary green accent.** Vibrant like a real palm frond. |
-| `--green-spring` | `#7BB369` | Spring | Lighter accent — hover states, active links, subtle highlights |
-| `--green-sage` | `#5C8F4D` | Sage | Mid-green for transitions, hero gradient mid-stop, decorative shapes |
-| `--green-forest` | `#1F3326` | Forest Deep | Dark anchor band (stats section), strong green headlines, footer alternate |
-| `--green-mint` | `#F0F4EC` | Mint Linen | Card-section background tint — barely-perceptible green wash |
+| `--color-graphite` | `#2D1E17` | Graphite | Body text, **primary CTA fill**, dark anchor bands (stats / process / footer / CTA strip) |
+| `--color-judge` | `#523F31` | Judge Gray | Hero italic emphasis ("of the"), CTA hover, secondary text |
+| `--color-coffee` | `#796254` | Roman Coffee | Italic numeral markers (i. ii. iii.), eyebrow labels on light surfaces |
+| `--color-squirrel` | `#9D8A7C` | Squirrel | Tertiary text, disabled nav state (Tracking placeholder) |
+| `--color-silk` | `#C4B6AB` | Silk | **Divider rules and borders only** — never a surface. The 1px line between content cells. |
+| `--color-porcelain` | `#FAF7F2` | Porcelain | **Primary section surface** (`.specs`, `.featured`, `.difference`, `.packing`, `.about`, `.contact`) |
+| `--color-linen` | `#F5F1E8` | Linen | **Page background** (`<body>`) + alt-section bands. Slightly darker than Porcelain; the eye reads it as a base layer with Porcelain "inset" sections sitting on top. |
 
-#### Browns — heritage anchors
-| Token | Hex | Name | Usage |
-|---|---|---|---|
-| `--heritage-graphite` | `#2D1E17` | Graphite | Footer background, strongest text on light surfaces |
-| `--heritage-judge-gray` | `#523F31` | Judge Gray | Body text, secondary headlines, nav text |
-| `--heritage-roman-coffee` | `#796254` | Roman Coffee | Eyebrow text, secondary buttons, accent details |
-| `--heritage-squirrel` | `#9D8A7C` | Squirrel | Tertiary text, subtle icons, disabled states |
-| `--heritage-silk` | `#C4B6AB` | Silk | Borders, card outlines, dividers on light surfaces |
+#### Semantic surfaces
+| Token | Resolves to | Where |
+|---|---|---|
+| `--surface-page` | `--color-linen` | `<body>` background |
+| `--surface-section` | `--color-porcelain` | `.specs`, `.difference`, `.packing`, `.featured`, `.about`, `.contact`, `.page-hero` |
+| `--surface-alt` | `--color-linen` | reserved for alt bands if needed |
+| `--surface-dark` | `--color-graphite` | `.stats`, `.process`, `.cta-strip`, `.footer`, hero vignette |
 
-#### Neutrals & accent
-| Token | Hex | Name | Usage |
-|---|---|---|---|
-| `--neutral-porcelain` | `#FAF7F2` | Porcelain | Page background — warm off-white, never pure `#FFFFFF` |
-| `--neutral-linen` | `#F5F1E8` | Linen | Card and alternate-row backgrounds |
-| `--accent-gold` | `#E8C97C` | Gold | **Hero CTA color** — pops against green. The bridge that prevents the green and brown halves from feeling like two separate palettes. Pulled from the logo's warm tones, brightened for contrast. |
-| `--accent-ember` | `#B8935F` | Ember | Hover state for gold CTA, small dividers on cream sections |
+#### What changed from the previous (5-tone) variant
+- **Reintroduced Porcelain + Linen** as soft off-white surfaces. The "Silk-only" experiment made every section the same flat tan — Variant C restores the layered editorial feel.
+- **Cards stripped of backgrounds.** `.pillar`, `.packing-card`, `.why-card`, `.feature-card` no longer have filled containers or coloured borders. Items in a grid sit directly on the section surface and are separated by 1px Silk vertical dividers (and horizontal dividers on the grid edges).
+- **Grids enforce 3-up rhythm.** `.packing-grid` and `.why-grid` now lock to `repeat(3, 1fr)` (was auto-fit) so the divider rules align cleanly into a magazine grid.
+- **Buttons get the editorial treatment.** Square corners (`border-radius: 0`), uppercase 12px / `letter-spacing: 0.14em`, Graphite fill on Linen text. Secondary buttons collapse to a tracked underline rather than an outlined box — the "view specifications →" treatment.
+- **Italic numeral markers.** `.packing-num` (`i.`, `ii.`, …) now reads as Fraunces italic in Roman Coffee, matching the editorial book convention.
+- **Highlighted spec rows** swap from the soft tinted card look to a typeset block: Linen tint with 1px Graphite top + bottom rules — feels like a pull-quote in a feature article.
 
-**Why gold for the hero CTA:** A green button on a green hero gets lost; a brown button looks muddy. Gold (lifted from the logo) hits the eye instantly and is the *one* color that appears in both the green and brown halves of the palette — that's what stops the site reading as two color systems stitched together.
+#### Legacy aliases
+The pre-Variant-C green/silk tokens (`--green-leaf`, `--green-forest`, `--accent-gold`, `--brown-silk` etc.) are kept in `style.css` as `var()` aliases that now resolve to the Variant C tokens — `--green-leaf` and `--green-forest` both → Graphite, `--accent-gold` → Porcelain (light tone for dark anchor sections), `--neutral-porcelain` → Porcelain, `--neutral-linen` → Linen, `--brown-silk` → Silk. Existing CSS continues to work without a site-wide find-and-replace.
 
 **Contrast check (key combos):**
-- `Forest Deep #1F3326` on `Porcelain #FAF7F2` → ~13.2:1 ✓ (WCAG AAA)
-- `Judge Gray #523F31` on `Porcelain` → ~8.9:1 ✓ (WCAG AAA)
-- `Coconut Leaf #4A8C4F` on `Porcelain` → ~3.9:1 ✓ (WCAG AA Large)
-- White text on `Coconut Leaf` button → ~4.5:1 ✓ (WCAG AA)
-- `Graphite #2D1E17` on `Gold #E8C97C` → ~9.8:1 ✓ (WCAG AAA) *— hero CTA*
-- White text on `Graphite` footer → ~14.5:1 ✓ (WCAG AAA)
+- `Graphite #2D1E17` on `Linen #F5F1E8` → ~13.3:1 ✓ (WCAG AAA) *— body text, primary CTA fill*
+- `Graphite` on `Porcelain #FAF7F2` → ~13.5:1 ✓ (WCAG AAA) *— headlines, CTA on light section*
+- `Linen` on `Graphite` → ~13.3:1 ✓ (WCAG AAA) *— hero text, footer, CTA text*
+- `Judge Gray #523F31` on `Linen` → ~8.0:1 ✓ (WCAG AAA) *— secondary text, hero italic*
+- `Roman Coffee #796254` on `Linen` → ~4.6:1 ✓ (WCAG AA) *— italic numerals, eyebrows*
+- `Squirrel #9D8A7C` on `Linen` → ~3.0:1 ✓ (WCAG AA Large) *— disabled Tracking nav item*
 
 ### Typography — Fraunces + Inter (client-chosen)
 - **Headlines:** `Fraunces` (Google Fonts, variable). Modern editorial serif with warm soft curves and a beautiful italic. Variable-axis support means we can use one font with multiple personalities — softer optical sizes for the hero headline, crisper settings for section titles, italic for the Vietnamese subhead *Pha Lê Của Vùng Đất Phù Sa*.
@@ -86,7 +89,7 @@ A balanced 40/60 system: **fresh plant greens** carry the action zones (CTAs, he
   - Hero H1: Fraunces 64px / line-height 1.0 / weight 400
   - Section H2: Fraunces 36–40px / line-height 1.1 / weight 400
   - Subsection H3: Fraunces 22–24px / weight 400
-  - Eyebrow labels: Inter 11px / letter-spacing 2px / uppercase / Roman Coffee or Coconut Leaf
+  - Eyebrow labels: Inter 11px / letter-spacing 2px / uppercase / Roman Coffee or Domino
   - Body: Inter 15px / line-height 1.7 / weight 400
   - Small/captions: Inter 12–13px / line-height 1.6
 - **Loading:** `<link rel="preconnect">` to `fonts.gstatic.com`; load only the weights actually used (Fraunces 400 + 400 italic; Inter 400 + 500); `font-display: swap`.
@@ -96,8 +99,8 @@ A balanced 40/60 system: **fresh plant greens** carry the action zones (CTAs, he
 - **Modern editorial heritage** — fresh and alive, but composed and trustworthy
 - Generous whitespace — let the content breathe
 - Subtle scroll-triggered fade-ins (not parallax circus acts)
-- Hero is full-bleed green canopy with layered organic shapes — to be replaced with real flycam footage of Ben Tre groves after 4/28 shoot
-- Real photography color-grading: warm mid-tones, golden hour, soft shadow — avoid cool/saturated tropical filters that fight the heritage browns
+- Hero is full-bleed flycam footage (Pexels coconut plantation drone clip in v1, Ben Tre footage swap-in after 4/28) sitting under a Graphite vignette so headlines stay readable
+- Real photography color-grading: warm mid-tones, golden hour, soft shadow — leans further into the all-brown palette; cool tones and saturated greens are explicitly out
 - No stock-photo clichés, no aggressive B2B corporate vibes
 
 ---
