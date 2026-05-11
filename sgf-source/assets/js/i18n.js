@@ -15,6 +15,11 @@ window.SGF_I18N = {
     'nav.tracking': 'Theo Dõi',
     'nav.contact': 'Liên Hệ',
     'nav.cta': 'Yêu Cầu Báo Giá',
+    'nav.story2': 'Câu Chuyện',
+    'nav.resources': 'Tài Liệu',
+    'nav.product': 'Sản Phẩm',
+    'nav.qa': 'Đảm Bảo Chất Lượng',
+    'nav.sourcing': 'Cung Ứng & Logistics',
 
     'hero.eyebrow': 'Bến Tre · Việt Nam',
     'hero.title.line1': 'Pha Lê',

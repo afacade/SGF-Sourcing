@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SGF Sourcing — Tri-Fold Brochure</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   SGF SOURCING — Tri-fold brochure
+   A4 landscape (297mm x 210mm), folded into 3 panels per side, 2 sides.
+   Open in browser → Ctrl+P → Save as PDF. Set "More settings → Margins:
+   None", and "Background graphics: ON".
+   ========================================================================= */
+
+:root {
+  --color-graphite: #2D1E17;
+  --color-judge:    #523F31;
+  --color-coffee:   #796254;
+  --color-squirrel: #9D8A7C;
+  --color-silk:     #C4B6AB;
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', -apple-system, 'Segoe UI', sans-serif;
+
+  /* Tri-fold geometry: A4 landscape = 297 x 210mm. Three equal panels = 99mm wide each. */
+  --panel-w: 99mm;
+  --page-h:  210mm;
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--color-graphite);
+  background: var(--color-squirrel); /* On screen, show the fold lines against a darker page */
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* On-screen container — center the spreads and add a margin so it doesn't feel cramped. */
+.viewer {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* The brochure spread = one printed sheet (3 panels in a row) */
+.spread {
+  width: 297mm;
+  height: var(--page-h);
+  display: grid;
+  grid-template-columns: var(--panel-w) var(--panel-w) var(--panel-w);
+  background: var(--color-silk);
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* Fold lines — subtle dotted vertical rules between panels.
+   On print, hide them. */
+.spread::before,
+.spread::after {
+  content: '';
+  position: absolute;
+  top: 6mm;
+  bottom: 6mm;
+  width: 0;
+  border-left: 0.5px dashed rgba(45, 30, 23, 0.18);
+  pointer-events: none;
+}
+.spread::before { left: var(--panel-w); }
+.spread::after  { left: calc(var(--panel-w) * 2); }
+
+.panel {
+  width: var(--panel-w);
+  height: var(--page-h);
+  padding: 14mm 11mm;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Surface variants per panel ----------------------------------------- */
+.panel--silk     { background: var(--color-silk); color: var(--color-graphite); }
+.panel--squirrel { background: var(--color-squirrel); color: var(--color-graphite); }
+.panel--graphite { background: var(--color-graphite); color: var(--color-silk); }
+.panel--graphite h1, .panel--graphite h2, .panel--graphite h3 { color: var(--color-silk); }
+
+/* --- Typography --------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.05;
+  color: var(--color-graphite);
+}
+
+p { font-size: 9.5pt; line-height: 1.55; color: var(--color-judge); }
+.panel--graphite p { color: rgba(196, 182, 171, 0.88); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-coffee);
+  margin-bottom: 8mm;
+}
+.panel--graphite .eyebrow { color: var(--color-silk); opacity: 0.82; }
+
+.eyebrow-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 9pt;
+  letter-spacing: 0.16em;
+  color: var(--color-coffee);
+  margin-bottom: 4mm;
+}
+.panel--graphite .eyebrow-italic { color: var(--color-silk); }
+.panel--squirrel .eyebrow-italic,
+.panel--squirrel .eyebrow { color: var(--color-graphite); }
+
+.divider {
+  width: 18mm;
+  height: 1px;
+  background: var(--color-graphite);
+  margin: 4mm 0 6mm;
+}
+.panel--graphite .divider { background: var(--color-silk); }
+
+/* --- Cover panel -------------------------------------------------------- */
+.cover {
+  justify-content: space-between;
+}
+.cover-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 6mm;
+}
+.cover-logo img {
+  width: 38mm;
+  height: auto;
+  margin-bottom: 4mm;
+}
+.cover-eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--color-coffee);
+  letter-spacing: 0.12em;
+}
+.cover-title {
+  font-family: var(--font-display);
+  font-size: 28pt;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 4mm 0;
+  color: var(--color-graphite);
+}
+.cover-title em {
+  font-style: italic;
+  color: var(--color-coffee);
+  font-weight: 400;
+}
+.cover-sub {
+  font-size: 10pt;
+  line-height: 1.45;
+  color: var(--color-judge);
+  margin-bottom: 8mm;
+  max-width: 70mm;
+}
+.cover-foot {
+  margin-top: auto;
+  border-top: 0.5px solid var(--color-coffee);
+  padding-top: 5mm;
+  font-size: 8pt;
+  color: var(--color-coffee);
+  letter-spacing: 0.06em;
+}
+
+/* --- Back panel --------------------------------------------------------- */
+.back-detail {
+  margin-bottom: 6mm;
+}
+.back-detail .label {
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-coffee);
+  display: block;
+  margin-bottom: 1.5mm;
+}
+.panel--graphite .back-detail .label { color: var(--color-silk); opacity: 0.7; }
+.back-detail .value {
+  font-size: 10pt;
+  line-height: 1.35;
+  color: var(--color-graphite);
+}
+.panel--graphite .back-detail .value { color: var(--color-silk); }
+
+.back-cert {
+  margin-top: auto;
+  padding-top: 6mm;
+  border-top: 0.5px solid rgba(196, 182, 171, 0.3);
+}
+.back-cert-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3mm 6mm;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 8pt;
+  color: var(--color-silk);
+  letter-spacing: 0.08em;
+}
+
+/* --- Inner / fold-in spec panel ----------------------------------------- */
+.spec-list {
+  margin-top: 4mm;
+}
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2.5mm 0;
+  border-bottom: 0.4px solid var(--color-coffee);
+  font-size: 8.5pt;
+}
+.spec-row.highlight {
+  border-bottom-width: 1px;
+}
+.spec-row .k {
+  color: var(--color-coffee);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 7pt;
+}
+.spec-row .v {
+  color: var(--color-graphite);
+  font-family: var(--font-display);
+  font-size: 11pt;
+  text-align: right;
+}
+.spec-row.highlight .v {
+  font-size: 14pt;
+  color: var(--color-graphite);
+}
+
+/* --- Story panels (inside) ---------------------------------------------- */
+.story-numeral {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16pt;
+  color: var(--color-coffee);
+  margin-bottom: 3mm;
+}
+.story-h {
+  font-family: var(--font-display);
+  font-size: 16pt;
+  line-height: 1.1;
+  margin-bottom: 4mm;
+  color: var(--color-graphite);
+}
+.story-lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--color-judge);
+  margin-bottom: 4mm;
+}
+.story-body {
+  font-size: 9pt;
+  line-height: 1.6;
+  color: var(--color-judge);
+}
+.story-block + .story-block { margin-top: 9mm; padding-top: 9mm; border-top: 0.5px solid var(--color-coffee); }
+
+/* --- Pillars panel ------------------------------------------------------ */
+.pillar {
+  margin-bottom: 6mm;
+}
+.pillar-rule {
+  width: 14mm;
+  height: 1.5px;
+  background: var(--color-graphite);
+  margin-bottom: 3mm;
+}
+.pillar h3 {
+  font-size: 13pt;
+  margin-bottom: 2mm;
+}
+.pillar p {
+  font-size: 8.5pt;
+  line-height: 1.5;
+}
+
+/* --- Why-us / CTA panel ------------------------------------------------- */
+.why-list {
+  list-style: none;
+  margin: 4mm 0;
+  padding: 0;
+}
+.why-list li {
+  padding: 3mm 0;
+  border-bottom: 0.4px solid rgba(196, 182, 171, 0.3);
+  font-size: 9pt;
+  line-height: 1.4;
+  color: var(--color-silk);
+}
+.why-list li:last-child { border-bottom: 0; }
+.why-list strong {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--color-silk);
+  margin-bottom: 1mm;
+}
+.cta-block {
+  margin-top: auto;
+  padding-top: 8mm;
+  border-top: 1px solid var(--color-silk);
+}
+.cta-block .cta-eye {
+  font-size: 7pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-silk);
+  opacity: 0.7;
+  margin-bottom: 3mm;
+}
+.cta-block .cta-h {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  line-height: 1.05;
+  color: var(--color-silk);
+  margin-bottom: 4mm;
+}
+.cta-block .cta-contact {
+  font-size: 9pt;
+  line-height: 1.55;
+  color: var(--color-silk);
+}
+.cta-block .cta-contact strong {
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-silk);
+  margin-bottom: 1mm;
+}
+
+/* --- Print rules -------------------------------------------------------- */
+@media print {
+  html, body { background: white; }
+  .viewer { padding: 0; gap: 0; }
+  .spread {
+    width: 297mm;
+    height: 210mm;
+    box-shadow: none;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .spread:last-of-type { page-break-after: auto; }
+  .spread::before, .spread::after { display: none; }
+  .viewer-label { display: none; }
+}
+
+.viewer-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-silk);
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<div class="viewer">
+
+  <!-- ====================================================================
+       SPREAD 1 — OUTSIDE OF BROCHURE
+       Panel order (left→right when sheet is laid flat, prints front of page)
+       [BACK] [INNER FLAP / SPECS] [COVER]
+       When folded: Cover wraps front, BACK behind it, INNER FLAP tucks inside
+       ==================================================================== -->
+  <div class="viewer-label">Outside · Print side 1</div>
+  <div class="spread" aria-label="Brochure outside">
+
+    <!-- Back panel — contact + certifications -->
+    <section class="panel panel--graphite">
+      <div class="eyebrow">Sales Office</div>
+      <div class="back-detail">
+        <span class="label">Email</span>
+        <span class="value">cris@sgfsourcing.com</span>
+      </div>
+      <div class="back-detail">
+        <span class="label">Phone / WhatsApp</span>
+        <span class="value">+84 917 329 878</span>
+      </div>
+      <div class="back-detail">
+        <span class="label">Headquarters</span>
+        <span class="value">Block 8, 28 Mai Chi Tho Street<br>Binh Trung Ward<br>Ho Chi Minh City, Vietnam</span>
+      </div>
+      <div class="back-detail">
+        <span class="label">LinkedIn</span>
+        <span class="value">linkedin.com/company/sgf-sourcing</span>
+      </div>
+      <div class="back-detail">
+        <span class="label">Web</span>
+        <span class="value">sgfsourcing.com</span>
+      </div>
+
+      <div class="back-cert">
+        <div class="eyebrow" style="margin-bottom:3mm;">Certifications</div>
+        <div class="back-cert-list">
+          <span>GlobalGAP</span>
+          <span>HACCP</span>
+          <span>SGS</span>
+          <span>Phytosanitary</span>
+          <span>Health</span>
+          <span>Fumigation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inner flap (when folded, tucks inside) — product spec sheet -->
+    <section class="panel panel--squirrel">
+      <div class="eyebrow-italic">— Specifications —</div>
+      <h2 style="font-size: 18pt; line-height: 1.05; margin-bottom: 5mm;">Fresh Young Coconut<br><em style="font-style: italic; color: var(--color-graphite);">Siamese · Xiêm</em></h2>
+      <p style="font-size: 9pt; color: var(--color-graphite); margin-bottom: 4mm;">Top-quality export grade, harvested at 9–10 months from Ben Tre's certified orchards.</p>
+
+      <div class="spec-list">
+        <div class="spec-row highlight">
+          <span class="k">Brix Sweetness</span>
+          <span class="v">7° – 9°</span>
+        </div>
+        <div class="spec-row highlight">
+          <span class="k">Shelf Life</span>
+          <span class="v">60 days</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Variety</span>
+          <span class="v" style="font-size:9pt;">Siamese (Xiêm)</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Origin</span>
+          <span class="v" style="font-size:9pt;">Ben Tre, Vietnam</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Maturity</span>
+          <span class="v" style="font-size:9pt;">9–10 months</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Size · Weight</span>
+          <span class="v" style="font-size:9pt;">12–15 cm · 0.5–0.8 kg</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">MOQ</span>
+          <span class="v" style="font-size:9pt;">24 tons</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Lead Time</span>
+          <span class="v" style="font-size:9pt;">15–30 days</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Incoterms</span>
+          <span class="v" style="font-size:9pt;">FOB · CFR · CIF</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Port</span>
+          <span class="v" style="font-size:9pt;">Cat Lai · Hai Phong</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Pack A</span>
+          <span class="v" style="font-size:9pt;">9 pcs / carton · 8–9 kg</span>
+        </div>
+        <div class="spec-row">
+          <span class="k">Pack B</span>
+          <span class="v" style="font-size:9pt;">12 pcs / carton · 11–12 kg</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cover panel — front face when folded -->
+    <section class="panel panel--silk cover">
+      <div>
+        <div class="cover-logo">
+          <img src="assets/img/sgf-logo.png" alt="SGF Sourcing">
+          <span class="cover-eyebrow">Pha Lê Của Vùng Đất Phù Sa</span>
+        </div>
+        <h1 class="cover-title">The Crystal<br><em>of the</em><br>Mekong&nbsp;Delta.</h1>
+        <p class="cover-sub">Premium Vietnamese fresh young coconut. GlobalGAP certified. HACCP packed. Brix 7°–9°.</p>
+      </div>
+      <div class="cover-foot">
+        VIETNAM AGRI · CONNECTING MARKETS<br>
+        sgfsourcing.com
+      </div>
+    </section>
+  </div>
+
+  <!-- ====================================================================
+       SPREAD 2 — INSIDE OF BROCHURE
+       Three story panels read left→right when fully unfolded.
+       ==================================================================== -->
+  <div class="viewer-label">Inside · Print side 2</div>
+  <div class="spread" aria-label="Brochure inside">
+
+    <!-- Inside panel 1 — Story (chapters i + ii) -->
+    <section class="panel panel--silk">
+      <div class="eyebrow-italic">— The Story —</div>
+      <div class="divider"></div>
+
+      <div class="story-block">
+        <div class="story-numeral">i.</div>
+        <h3 class="story-h">Where the river writes the soil</h3>
+        <p class="story-lead">Before there is a coconut, there is the river.</p>
+        <p class="story-body">The Mekong carries silt from a thousand miles of mountain and jungle, laying it on the low fields of Ben Tre and Long An year after year. The water turns brackish; the soil turns rich beyond belief. No fertilizer teaches these groves to grow sweetness — the land does it for us, at Brix 7° to 9°.</p>
+      </div>
+
+      <div class="story-block">
+        <div class="story-numeral">ii.</div>
+        <h3 class="story-h">The hands that know the tree</h3>
+        <p class="story-lead">A coconut is not a product yet when it leaves the grove.</p>
+        <p class="story-body">Our farmers climb by hand, because a bruised nut is a broken promise. They have done this for thirty, forty years — long enough to read each tree the way a conductor reads a score. We do not only export coconuts. We export the dignity of the Vietnamese farmer.</p>
+      </div>
+    </section>
+
+    <!-- Inside panel 2 — Diamond Cut + 3 pillars -->
+    <section class="panel panel--squirrel">
+      <div class="eyebrow-italic">— The Difference —</div>
+      <div class="divider"></div>
+
+      <div class="story-block" style="margin-bottom: 8mm;">
+        <div class="story-numeral">iii.</div>
+        <h3 class="story-h">Cut like a diamond</h3>
+        <p class="story-body" style="color: var(--color-graphite);">At the packing house each husk is carved away by hand — faceted into the form the trade calls "Diamond Cut." Every nut shrink-wrapped, labeled, logged to HACCP. From tree to cold chain in hours, not days.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-rule"></div>
+        <h3>Brix 7°–9°</h3>
+        <p style="color: var(--color-graphite);">Higher natural sweetness than typical Thai or Philippine. No added sugar. The soil does the work.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-rule"></div>
+        <h3>GlobalGAP Certified</h3>
+        <p style="color: var(--color-graphite);">Audited annually. MRL-compliant for EU, US and Japanese markets.</p>
+      </div>
+      <div class="pillar" style="margin-bottom: 0;">
+        <div class="pillar-rule"></div>
+        <h3>Diamond Cut Standard</h3>
+        <p style="color: var(--color-graphite);">Each nut individually finished, shrink-wrapped and labeled. Retail-shelf ready on arrival.</p>
+      </div>
+    </section>
+
+    <!-- Inside panel 3 — Why partner + CTA -->
+    <section class="panel panel--graphite">
+      <div class="eyebrow-italic">— Why Partner With Us —</div>
+      <div class="divider"></div>
+
+      <ul class="why-list">
+        <li><strong>Premium Quality Control</strong>Multi-stage inspection from orchard to carton. Every nut hand-sorted to your grade.</li>
+        <li><strong>Direct-from-Farm</strong>No middlemen. You pay for coconut, not for the chain.</li>
+        <li><strong>Advanced Post-Harvest Tech</strong>Ozone wash, full cold-chain, up to 8 weeks of sea-transit freshness.</li>
+        <li><strong>Professional Logistics</strong>Certificate of Origin, real-time visibility, 24-hour quote turnaround.</li>
+        <li><strong>Custom Packaging &amp; MOQ</strong>Private-label ready. Adjustable MOQ for growing buyers.</li>
+      </ul>
+
+      <div class="cta-block">
+        <div class="cta-eye">— Start Your Order —</div>
+        <div class="cta-h">Request a quote in 24&nbsp;hours.</div>
+        <div class="cta-contact">
+          <strong>Cris Do · Sales Division Manager</strong>
+          cris@sgfsourcing.com<br>
+          +84 917 329 878 · WhatsApp<br>
+          sgfsourcing.com
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>
+</body>
+</html>
