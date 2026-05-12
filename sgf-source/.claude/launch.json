@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "sgf-coconut",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5173"],
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [".claude/dev_server.py", "5173"],
       "port": 5173
     }
   ]

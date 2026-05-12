@@ -155,12 +155,74 @@
     el.textContent = messages[kind][lang] || messages[kind].en;
   }
 
-  /* ----- 5. INIT ------------------------------------------------------ */
+  /* ----- 5. NAV DROPDOWN MENU ----------------------------------------- */
+  // The site has 11 primary nav items — too many to fit inline. We hide
+  // .nav-links by default in CSS and inject a "Menu" button here that
+  // toggles a dropdown panel anchored beneath it.
+  function bindMenuToggle() {
+    const primaryNav = document.querySelector('header.nav nav[aria-label="Primary"]');
+    const links = primaryNav?.querySelector('.nav-links');
+    if (!primaryNav || !links) return;
+
+    // Avoid double-injection if main.js is loaded twice.
+    if (primaryNav.querySelector('.nav-menu-toggle')) return;
+
+    if (!links.id) links.id = 'sgf-primary-menu';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nav-menu-toggle';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', links.id);
+    button.setAttribute('aria-label', 'Open menu');
+    button.innerHTML =
+      '<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>' +
+      '<span class="menu-label" data-i18n="nav.menu">Menu</span>';
+
+    // Insert the button before the <ul.nav-links> so it lives in the same nav region.
+    primaryNav.insertBefore(button, links);
+
+    const open = () => {
+      button.setAttribute('aria-expanded', 'true');
+      links.classList.add('is-open');
+    };
+    const close = () => {
+      button.setAttribute('aria-expanded', 'false');
+      links.classList.remove('is-open');
+    };
+    const toggle = () => {
+      (button.getAttribute('aria-expanded') === 'true') ? close() : open();
+    };
+
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+
+    // Close when clicking a link in the dropdown.
+    links.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) close();
+    });
+
+    // Click outside the nav closes the dropdown.
+    document.addEventListener('click', (e) => {
+      if (!primaryNav.contains(e.target)) close();
+    });
+
+    // Escape key closes the dropdown.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  }
+
+  /* ----- 6. INIT ------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
     setLang(getInitialLang());
     bindLangToggles();
     bindAnchorScroll();
     bindReveals();
     bindForm();
+    bindMenuToggle();
   });
 })();

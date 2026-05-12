@@ -20,6 +20,7 @@ window.SGF_I18N = {
     'nav.product': 'Sản Phẩm',
     'nav.qa': 'Đảm Bảo Chất Lượng',
     'nav.sourcing': 'Cung Ứng & Logistics',
+    'nav.menu': 'Trình Đơn',
 
     'hero.eyebrow': 'Bến Tre · Việt Nam',
     'hero.title.line1': 'Pha Lê',

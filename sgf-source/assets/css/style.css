@@ -24,10 +24,10 @@
   --color-porcelain: #FAF7F2; /* warm off-white — primary section surface */
   --color-linen: #F5F1E8;     /* slightly darker linen — page background + alt section */
 
-  /* Semantic surfaces */
-  --surface-page: var(--color-linen);
-  --surface-section: var(--color-porcelain);
-  --surface-alt: var(--color-linen);
+  /* Semantic surfaces — body + sections set to pure white */
+  --surface-page: #FFFFFF;
+  --surface-section: #FFFFFF;
+  --surface-alt: #FFFFFF;
   --surface-dark: var(--color-graphite);
 
   /* Legacy token aliases — kept so existing rules keep resolving. */
@@ -35,7 +35,7 @@
   --green-spring: var(--color-judge);
   --green-sage: var(--color-coffee);
   --green-forest: var(--color-graphite);  /* dark anchor band */
-  --green-mint: var(--color-porcelain);   /* light tint band */
+  --green-mint: #FFFFFF;   /* light tint band — now white */
 
   --brown-graphite: var(--color-graphite);
   --brown-judge: var(--color-judge);
@@ -43,8 +43,8 @@
   --brown-squirrel: var(--color-squirrel);
   --brown-silk: var(--color-silk);
 
-  --neutral-porcelain: var(--color-porcelain);
-  --neutral-linen: var(--color-linen);
+  --neutral-porcelain: #FFFFFF;
+  --neutral-linen: #FFFFFF;
   --accent-gold: var(--color-porcelain);  /* light tone on dark bg (hero, stats, footer) */
   --accent-ember: var(--color-judge);
 
@@ -258,9 +258,9 @@ p { margin: 0 0 var(--space-2); }
 }
 .nav-brand { flex-shrink: 0; }
 .nav-brand-text { display: none; }
+/* Default state: hidden — the dropdown toggle (.nav-menu-toggle) reveals it. */
 .nav-links {
-  display: flex;
-  gap: clamp(28px, 3vw, 48px);
+  display: none;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -273,6 +273,77 @@ p { margin: 0 0 var(--space-2); }
   white-space: nowrap;
 }
 .nav-links a:hover { color: var(--green-leaf); }
+
+/* Dropdown panel — anchored under the menu button, right-aligned to the container. */
+.nav-links.is-open {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  position: absolute;
+  top: calc(100% - 6px);
+  right: var(--container-pad);
+  min-width: 260px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--color-silk);
+  padding: 8px 0;
+  box-shadow: 0 14px 36px rgba(45, 30, 23, 0.12);
+  z-index: 200;
+}
+.nav-links.is-open li { width: 100%; }
+.nav-links.is-open a,
+.nav-links.is-open .nav-disabled {
+  display: block;
+  padding: 10px 20px;
+  line-height: 1.35;
+  font-size: 15px;
+}
+.nav-links.is-open a:hover { background: var(--color-linen); color: var(--green-leaf); }
+.nav-links.is-open a.active {
+  color: var(--green-forest);
+  font-weight: 600;
+  background: var(--color-porcelain);
+}
+
+/* Menu button (hamburger + label). Injected by main.js. */
+.nav-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: 0;
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--brown-judge);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav-menu-toggle:hover { background: var(--color-linen); color: var(--green-leaf); }
+.nav-menu-toggle .menu-icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-menu-toggle .menu-icon span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.nav-menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(2) { opacity: 0; }
+.nav-menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
 
 /* Tracking placeholder — visible in nav, not interactive (no destination yet). */
 .nav-links .nav-disabled {
@@ -343,12 +414,14 @@ p { margin: 0 0 var(--space-2); }
 .nav-cta:hover { background: var(--green-forest); color: var(--neutral-porcelain); }
 
 @media (max-width: 820px) {
-  .nav-links { display: none; }
+  /* .nav-links is hidden by default and only shown when opened — no override needed here. */
   .nav-inner { gap: var(--space-2); padding: 10px 0; }
   .nav-brand-text { display: none; }
-  .nav-brand { padding-left: 50px; }
   .nav-brand img { height: 80px; }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
+  .nav-menu-toggle { padding: 7px 10px; font-size: 13px; }
+  .nav-menu-toggle .menu-label { display: none; }
+  .nav-links.is-open { min-width: 220px; right: var(--space-2); }
 }
 @media (max-width: 380px) {
   .lang-toggle { font-size: 11px; }
@@ -714,6 +787,200 @@ section { padding: var(--space-7) 0; }
 .packing-card + .packing-card { border-left: 1px solid var(--color-silk); }
 .packing-card:nth-child(3n+1) { border-left: 0; }
 .packing-card:hover { background: var(--color-linen); }
+.packing-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  margin: 0 0 var(--space-3);
+  filter: saturate(0.9);
+}
+
+/* Full-width banner image strip used between page-hero and content sections. */
+.page-banner {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+.page-banner img {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  filter: saturate(0.92);
+}
+
+/* ---------------------------------------------------------------------------
+   RESOURCE-LIST — horizontal row cards (Resources page).
+   Distinct from the 3-up .packing-grid: each item spans full width with a
+   numbered badge on the left, content in the middle, meta on the right.
+   --------------------------------------------------------------------------- */
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-silk);
+  margin-top: var(--space-4);
+}
+.resource-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-silk);
+  transition: background 0.2s ease;
+}
+.resource-row:hover { background: var(--color-linen); }
+.resource-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--brown-coffee);
+  text-align: center;
+  line-height: 1;
+}
+.resource-body h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 6px;
+  color: var(--color-graphite);
+}
+.resource-body p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--brown-judge);
+  margin: 0;
+}
+.resource-meta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brown-coffee);
+  text-align: right;
+  min-width: 140px;
+}
+@media (max-width: 720px) {
+  .resource-row { grid-template-columns: 48px 1fr; }
+  .resource-meta { grid-column: 1 / -1; text-align: left; padding-left: 60px; }
+}
+
+/* ---------------------------------------------------------------------------
+   FAQ ACCORDION — native <details> with editorial styling.
+   --------------------------------------------------------------------------- */
+.faq-accordion {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-silk);
+}
+.faq-accordion details {
+  border-bottom: 1px solid var(--color-silk);
+  padding: 0;
+}
+.faq-accordion summary {
+  cursor: pointer;
+  list-style: none;
+  padding: var(--space-3) var(--space-2);
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--color-graphite);
+  position: relative;
+  padding-right: 44px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.faq-accordion summary::-webkit-details-marker { display: none; }
+.faq-accordion summary:hover { background: var(--color-linen); color: var(--green-leaf); }
+.faq-accordion summary::after {
+  content: '+';
+  position: absolute;
+  right: var(--space-2);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--brown-coffee);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.faq-accordion details[open] summary { color: var(--green-leaf); }
+.faq-accordion details[open] summary::after {
+  content: '–';
+  color: var(--green-leaf);
+}
+.faq-accordion .faq-body {
+  padding: 0 var(--space-2) var(--space-3);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--brown-judge);
+}
+
+/* ---------------------------------------------------------------------------
+   PACKING-STRIP — alternating image-left / image-right rows for packing.html.
+   Replaces the uniform 3-up grid with a magazine-style scroll layout.
+   --------------------------------------------------------------------------- */
+.packing-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+}
+.packing-row {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+.packing-row:nth-child(even) .packing-row-image { order: 2; }
+.packing-row:nth-child(even) .packing-row-text  { order: 1; }
+.packing-row-image img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.92);
+}
+.packing-row-text {
+  padding: 0 var(--space-2);
+}
+.packing-row-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--brown-coffee);
+  margin-bottom: 10px;
+}
+.packing-row-text h3 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 var(--space-2);
+  color: var(--color-graphite);
+}
+.packing-row-text p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--brown-judge);
+  margin: 0 0 var(--space-3);
+}
+.packing-row-meta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brown-coffee);
+  border-top: 1px solid var(--color-silk);
+  padding-top: var(--space-2);
+}
+@media (max-width: 720px) {
+  .packing-row,
+  .packing-row:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+  .packing-row:nth-child(even) .packing-row-image,
+  .packing-row:nth-child(even) .packing-row-text { order: initial; }
+  .packing-row-image img { height: 260px; }
+}
 .packing-num {
   font-family: var(--font-display);
   font-style: italic;
