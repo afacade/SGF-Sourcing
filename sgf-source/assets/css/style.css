@@ -796,6 +796,62 @@ section { padding: var(--space-7) 0; }
   filter: saturate(0.9);
 }
 
+/* ---------------------------------------------------------------------------
+   SPLASH HERO — edge-to-edge image with title overlay. Replaces the quiet
+   white .page-hero block on subpages. Use one distinct photo per page.
+   --------------------------------------------------------------------------- */
+.splash {
+  position: relative;
+  height: 70vh;
+  min-height: 460px;
+  max-height: 760px;
+  overflow: hidden;
+  background: var(--color-graphite);
+}
+.splash img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) saturate(0.9);
+}
+.splash-text {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: flex-end;
+  padding: 0 clamp(24px, 5vw, 80px) clamp(48px, 7vw, 96px);
+  color: var(--color-porcelain);
+  z-index: 2;
+}
+.splash-text .splash-eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(13px, 1.3vw, 17px);
+  letter-spacing: 0.16em;
+  opacity: 0.88;
+  margin-bottom: 16px;
+}
+.splash-text h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6.5vw, 96px);
+  line-height: 0.98;
+  margin: 0 0 18px;
+  max-width: 16ch;
+  color: var(--color-porcelain);
+  letter-spacing: -0.01em;
+}
+.splash-text p {
+  max-width: 56ch;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.55;
+  opacity: 0.92;
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .splash { height: 64vh; min-height: 420px; }
+  .splash-text { padding-bottom: 36px; }
+}
+
 /* Full-width banner image strip used between page-hero and content sections. */
 .page-banner {
   display: block;
@@ -1538,6 +1594,103 @@ section { padding: var(--space-7) 0; }
 @media (max-width: 720px) {
   .feature-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   .feature-card img { height: 220px; }
+}
+
+/* ---------------------------------------------------------------------------
+   BLOG MOSAIC — asymmetric magazine grid (Pattern 02 in mockups).
+   Top block: 1 hero card (spans 2 rows on the left) + 4 supporting cards in a
+   2x2 grid on the right. Bottom block: 4 cards in a single row.
+   9 posts total.
+   --------------------------------------------------------------------------- */
+.blog-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.blog-mosaic .feature-card {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+.blog-mosaic .feature-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.blog-mosaic .feature-card:hover img { transform: scale(1.04); }
+
+/* Dark gradient + overlay text — labels sit ON the photo, not below it. */
+.blog-mosaic .feature-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgba(20,12,8,0.72));
+  pointer-events: none;
+}
+.blog-mosaic .feature-card-body {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 24px 24px;
+  color: var(--color-porcelain);
+  z-index: 2;
+}
+.blog-mosaic .feature-eyebrow {
+  color: var(--color-silk);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+.blog-mosaic .feature-card h3 {
+  color: var(--color-porcelain);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.12;
+  margin: 0 0 8px;
+}
+.blog-mosaic .feature-card p {
+  color: rgba(250, 247, 242, 0.86);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0 0 10px;
+  max-width: 40ch;
+}
+.blog-mosaic .feature-cta {
+  color: var(--color-porcelain);
+  border-bottom-color: var(--color-silk);
+  font-size: 11px;
+}
+
+/* Card sizing — first card is the magazine hero. */
+.blog-mosaic .feature-card { aspect-ratio: 4 / 5; }
+.blog-mosaic .feature-card.hero {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+  aspect-ratio: auto;
+}
+.blog-mosaic .feature-card.hero h3 {
+  font-size: clamp(28px, 3.4vw, 44px);
+  max-width: 16ch;
+}
+.blog-mosaic .feature-card.hero p {
+  font-size: 15px;
+  max-width: 52ch;
+}
+
+@media (max-width: 960px) {
+  .blog-mosaic { grid-template-columns: repeat(2, 1fr); }
+  .blog-mosaic .feature-card.hero {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+  }
+  .blog-mosaic .feature-card { aspect-ratio: 1 / 1; }
+  .blog-mosaic .feature-card.hero { aspect-ratio: 16 / 10; }
+}
+@media (max-width: 560px) {
+  .blog-mosaic { grid-template-columns: 1fr; }
+  .blog-mosaic .feature-card.hero { grid-column: auto; }
 }
 
 /* -------------------------------------------------------------------------
