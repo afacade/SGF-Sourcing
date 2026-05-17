@@ -47,20 +47,13 @@
   "logo": "https://sgfsourcing.com/assets/img/sgf-logo.png",
   "slogan": "Vietnam Agri · Connecting Markets",
   "description": "Vietnamese agricultural exporter specializing in fresh young coconut from the Mekong Delta. GlobalGAP certified, HACCP packed.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Block 8, 28 Mai Chi Tho Street, Binh Trung Ward",
-    "addressLocality": "Ho Chi Minh City",
-    "addressCountry": "VN"
-  },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+84-917-329-878",
     "contactType": "Sales",
     "email": "cris@sgfsourcing.com",
     "availableLanguage": ["en", "vi"]
   },
-  "sameAs": ["https://www.linkedin.com/company/sgf-sourcing/"]
+  "sameAs": ["https://www.linkedin.com/company/110902379/"]
 }
 </script>
 </head>
@@ -78,16 +71,10 @@
     </a>
     <nav aria-label="Primary">
       <ul class="nav-links">
-        <li><a href="about.html" class="active" data-i18n="nav.story">Story</a></li>
-        <li><a href="why-us.html" data-i18n="nav.difference">Why Us</a></li>
-        <li><a href="specifications.html" data-i18n="nav.specs">Specifications</a></li>
-        <li><a href="packing.html" data-i18n="nav.packing">Packing</a></li>
-        <li><span class="nav-disabled" data-i18n="nav.tracking" title="Coming soon">Tracking</span></li>
-        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-        <li><a href="story.html" data-i18n="nav.story2">Story</a></li>
+        <li><a href="about.html" class="active" data-i18n="nav.about">About Us</a></li>
+        <li><a href="product.html" data-i18n="nav.services">Services</a></li>
+        <li><a href="find-partners.html" data-i18n="nav.find">Find Partners</a></li>
         <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
-        <li><a href="product.html" data-i18n="nav.product">Product</a></li>
-        <li><a href="quality-assurance.html" data-i18n="nav.qa">Quality Assurance</a></li>
         <li><a href="sourcing-logistics.html" data-i18n="nav.sourcing">Sourcing &amp; Logistics</a></li>
         <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
       </ul>
@@ -178,13 +165,41 @@
 <!-- =========================================================================
      ABOUT — short company block
      ========================================================================= -->
+<!-- =========================================================================
+     LEADERSHIP — Cris portrait
+     ========================================================================= -->
+<section class="leadership" id="leadership" aria-labelledby="leadership-title">
+  <div class="container leadership-inner reveal">
+    <span class="eyebrow-italic" data-i18n="leadership.eyebrow">— About Us —</span>
+    <h2 id="leadership-title" data-i18n="leadership.title">Ethical at source. Transparent in every shipment.</h2>
+    <p class="leadership-lede" data-i18n="leadership.lede">Built on generations of trading experience in Asia.</p>
+    <div class="leadership-portrait">
+      <img src="assets/img/leadership/cris-portrait.jpg" alt="Cris Do — Director, SGF Sourcing" loading="lazy" onerror="this.parentElement.style.display='none'">
+    </div>
+    <p class="leadership-name" data-i18n="leadership.name">Cris Do</p>
+    <p class="leadership-role" data-i18n="leadership.role">Director · Contract Negotiation Analyst · Global Sourcing Specialist</p>
+  </div>
+</section>
+
 <section class="about" id="about" aria-labelledby="about-title">
   <div class="container about-inner reveal">
     <span class="eyebrow-italic" data-i18n="about.eyebrow">— About SGF Sourcing —</span>
     <h2 id="about-title" data-i18n="about.title">Vietnam Agri · Connecting Markets</h2>
     <p data-i18n="about.body">SGF Sourcing is a Vietnamese agricultural exporter with 10+ years of experience linking the Mekong Delta's finest harvests to importers worldwide. Headquartered in Ho Chi Minh City with direct access to Ben Tre and Long An — Vietnam's coconut heartland — we combine deep local sourcing expertise with international standards compliance.</p>
-    <div class="markets" aria-label="Export markets">
-      <span>Europe</span>·<span>North America</span>·<span>Middle East</span>·<span>Japan</span>·<span>Korea</span>·<span>Taiwan</span>
+
+    <div class="export-markets reveal" aria-labelledby="markets-title">
+      <h3 id="markets-title" class="export-markets-title" data-i18n="markets.title">Markets we have exported to</h3>
+      <ul class="export-markets-list">
+        <li data-i18n="markets.nl">Netherlands</li>
+        <li data-i18n="markets.ca">Canada</li>
+        <li data-i18n="markets.sg">Singapore</li>
+        <li data-i18n="markets.au">Australia</li>
+        <li data-i18n="markets.jp">Japan</li>
+      </ul>
+    </div>
+
+    <div class="markets" aria-label="Export regions">
+      <span data-i18n="region.eu">EUROPE</span>·<span data-i18n="region.na">NORTH AMERICA</span>·<span data-i18n="region.me">MIDDLE EAST</span>·<span data-i18n="region.jp">JAPAN</span>·<span data-i18n="region.kr">KOREA</span>·<span data-i18n="region.tw">TAIWAN</span>
     </div>
     <div class="page-cta">
       <a href="contact.html" class="btn btn-primary" data-i18n="hero.cta.primary">Request a Quote <span class="arrow">→</span></a>
@@ -200,26 +215,25 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/img/sgf-logo.png" alt="SGF Sourcing" width="44" height="44">
+        <img src="assets/img/sgf-logo.png" alt="SGF Sourcing" width="64" height="64" class="footer-logo-img">
         <p data-i18n="footer.about">A Vietnamese agricultural exporter linking the Mekong Delta to importers worldwide. GlobalGAP and HACCP certified.</p>
         <div class="tagline">Vietnam Agri · Connecting Markets</div>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.explore">Explore</h4>
         <ul>
-          <li><a href="about.html" data-i18n="nav.story">Story</a></li>
-          <li><a href="why-us.html" data-i18n="nav.difference">Why Us</a></li>
-          <li><a href="specifications.html" data-i18n="nav.specs">Specifications</a></li>
-          <li><a href="packing.html" data-i18n="nav.packing">Packing Formats</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About Us</a></li>
+          <li><a href="product.html" data-i18n="nav.services">Services</a></li>
+          <li><a href="find-partners.html" data-i18n="nav.find">Find Partners</a></li>
+          <li><a href="resources.html" data-i18n="nav.resources">Resources</a></li>
+          <li><a href="sourcing-logistics.html" data-i18n="nav.sourcing">Sourcing &amp; Logistics</a></li>
           <li><a href="blog.html" data-i18n="nav.blog">Blog</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.contact">Contact</h4>
         <ul>
-          <li><a href="mailto:cris@sgfsourcing.com">cris@sgfsourcing.com</a></li>
-          <li><a href="tel:+84917329878">+84 917 329 878</a></li>
-          <li><a href="https://www.linkedin.com/company/sgf-sourcing/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:cris@sgfsourcing.com">cris@sgfsourcing.com</a></li>          <li><a href="https://www.linkedin.com/company/110902379/" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
