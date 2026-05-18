@@ -378,6 +378,18 @@ window.SGF_I18N = {
     'find.cta.body': 'Gửi một thông tin ngắn về bạn là ai và đang làm gì. Chúng tôi xem xét mọi giới thiệu và phản hồi trong vòng năm ngày làm việc.',
     'find.cta.primary': 'Liên Hệ →',
     'find.cta.secondary': 'Về SGF Sourcing',
+    'find.b2b.eyebrow': '— Nơi Tìm Thấy Chúng Tôi —',
+    'find.b2b.title': 'Sàn B2B & danh bạ tìm nguồn cung.',
+    'find.b2b.lede': 'SGF Sourcing duy trì sự hiện diện chủ động trên các nền tảng thương mại toàn cầu mà nhà nhập khẩu, đại lý sỉ và nhà phân phối sử dụng hàng ngày.',
+    'find.b2b.alibaba': 'Sỉ toàn cầu',
+    'find.b2b.gs': 'Người mua nhập khẩu',
+    'find.b2b.mic': 'OEM & xuất khẩu',
+    'find.b2b.tk': 'Mạng lưới phân phối',
+    'find.b2b.g4w': 'Khách hàng ngành thực phẩm',
+    'find.b2b.ec21': 'B2B châu Á',
+    'find.b2b.europages': 'Nguồn cung EU',
+    'find.b2b.kompass': 'Danh bạ công ty',
+    'find.b2b.thomasnet': 'Người mua công nghiệp Mỹ',
 
     /* ===== Blog (blog.html) — new 5-post layout ===== */
     'blog.eyebrow': '— Từ Vùng Đất —',
