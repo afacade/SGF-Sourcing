@@ -252,14 +252,14 @@ p { margin: 0 0 var(--space-2); }
   text-decoration: none;
 }
 .nav-brand img {
-  height: 130px;             /* +30% — was 100px */
+  height: 130px;
   width: auto;
   flex-shrink: 0;
-  /* Negative margins compensate so the bar itself doesn't grow. */
-  margin-top: -15px;
-  margin-bottom: -15px;
+  /* Breathing room top + bottom so the logo is never clipped;
+     the nav bar grows to contain it. */
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
-/* Let the enlarged logo overflow the bar visually without clipping. */
 .nav { overflow: visible; }
 .nav-inner { overflow: visible; }
 .nav-brand { flex-shrink: 0; }
@@ -377,9 +377,9 @@ nav[aria-label="Primary"] {
   .nav-inner { gap: var(--space-2); padding: 10px 0; flex-wrap: wrap; }
   .nav-brand-text { display: none; }
   .nav-brand img {
-    height: 83px;            /* +30% — was 64px */
-    margin-top: -10px;
-    margin-bottom: -10px;
+    height: 83px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
   .nav-cta { padding: 8px 14px; font-size: 12px; }
   nav[aria-label="Primary"] {
