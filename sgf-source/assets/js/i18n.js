@@ -176,6 +176,12 @@ window.SGF_I18N = {
     'home.f.cta.specs': 'Xem thông số →',
     'home.f.cta.pack': 'Xem quy cách →',
 
+    /* ===== Product carousel (homepage) ===== */
+    'show.eyebrow': '— Chúng Tôi Cung Cấp —',
+    'show.title': 'Sản Phẩm Dừa Của Chúng Tôi.',
+    'show.lede': 'Chín quy cách xuất khẩu, mỗi loại được hoàn thiện thủ công theo tiêu chuẩn của bạn và vận chuyển từ Bến Tre.',
+    'show.cta.all': 'Xem Tất Cả Sản Phẩm',
+
     'form.firstname': 'Tên *', 'form.lastname': 'Họ *',
     'form.company': 'Công Ty *', 'form.country': 'Quốc Gia *',
     'form.email': 'Email Công Việc *', 'form.phone': 'Điện Thoại',

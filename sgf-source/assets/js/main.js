@@ -89,7 +89,7 @@
   // TODO: REPLACE — set FORM_ENDPOINT to the Formspree URL once provided.
   // Until then the form falls back to a mailto: link.
   const FORM_ENDPOINT = ''; // e.g. 'https://formspree.io/f/xxxxxxxx'
-  const FALLBACK_EMAIL = 'cris@sgfsourcing.com';
+  const FALLBACK_EMAIL = 'Hello@sgfsourcing.com';
 
   function bindForm() {
     const form = document.getElementById('quote-form');
@@ -148,14 +148,58 @@
         vi: 'Cảm ơn quý khách. Đội ngũ kinh doanh sẽ phản hồi trong vòng 24 giờ.'
       },
       error: {
-        en: 'Something went wrong. Please email cris@sgfsourcing.com directly.',
-        vi: 'Đã có lỗi xảy ra. Vui lòng gửi email trực tiếp đến cris@sgfsourcing.com.'
+        en: 'Something went wrong. Please email Hello@sgfsourcing.com directly.',
+        vi: 'Đã có lỗi xảy ra. Vui lòng gửi email trực tiếp đến Hello@sgfsourcing.com.'
       }
     };
     el.textContent = messages[kind][lang] || messages[kind].en;
   }
 
-  /* ----- 5. INIT ------------------------------------------------------ */
+  /* ----- 5. PRODUCT CAROUSEL ------------------------------------------ */
+  function bindCarousels() {
+    document.querySelectorAll('[data-carousel]').forEach(root => {
+      const track  = root.querySelector('.carousel-track');
+      const slides = root.querySelectorAll('.carousel-slide');
+      const prev   = root.querySelector('.carousel-prev');
+      const next   = root.querySelector('.carousel-next');
+      const dots   = root.querySelectorAll('.carousel-dots button');
+      if (!track || slides.length === 0) return;
+
+      let idx = 0;
+      const max = slides.length - 1;
+
+      function go(n) {
+        idx = (n < 0) ? max : (n > max) ? 0 : n;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+
+      prev && prev.addEventListener('click', () => go(idx - 1));
+      next && next.addEventListener('click', () => go(idx + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+
+      // Keyboard support when the carousel is focused
+      root.tabIndex = 0;
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); go(idx - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+      });
+
+      // Touch / swipe support
+      let touchX = null;
+      root.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+      root.addEventListener('touchend',   (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
+        touchX = null;
+      });
+
+      go(0);
+    });
+  }
+
+  /* ----- 6. INIT ------------------------------------------------------ */
   // Note: the previous version of this file injected a "Menu" hamburger
   // toggle because the nav had 11+ items. The nav was trimmed to 6 items
   // on May 16 2026; items are now rendered inline by CSS — no toggle needed.
@@ -165,5 +209,6 @@
     bindAnchorScroll();
     bindReveals();
     bindForm();
+    bindCarousels();
   });
 })();
