@@ -90,6 +90,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Respect the HTML5 `hidden` attribute even when author CSS sets display
+   (e.g. .blog-mosaic { display: grid }) which would otherwise override it. */
+[hidden] { display: none !important; }
+
 img, svg, video { display: block; max-width: 100%; height: auto; }
 
 a {
