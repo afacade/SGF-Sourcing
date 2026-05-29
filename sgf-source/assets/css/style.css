@@ -774,18 +774,21 @@ section { padding: var(--space-7) 0; }
    --------------------------------------------------------------------------- */
 .splash {
   position: relative;
-  height: 70vh;
-  min-height: 460px;
-  max-height: 760px;
-  overflow: hidden;
   background: var(--color-graphite);
+  /* No fixed height — the splash sizes to the natural aspect of its image so
+     the banner is shown in full, not cropped. */
 }
 .splash img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7) saturate(0.9);
+  display: block;
+  width: 100%;
+  height: auto;
+  /* No object-fit / filter — show the banner at full size, true colors. */
 }
+/* When the splash uses a designed page-header banner (the new exports under
+   assets/img/page-headers/), hide the overlay text since the banner already
+   has its own headline + branding baked in.  Photo-style splashes keep their
+   overlay so they still have a hero title. */
+.splash:has(img[src*="page-headers/"]) .splash-text { display: none; }
 .splash-text {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
