@@ -124,7 +124,7 @@ window.SGF_I18N = {
     'why.6.h': 'Đóng Gói & MOQ Linh Hoạt', 'why.6.p': 'Sẵn sàng nhãn riêng. MOQ điều chỉnh được cho khách hàng đang phát triển và đối tác lâu dài.',
 
     'about.eyebrow': '— Về SGF Sourcing —',
-    'about.title': 'Nông Sản Việt · Kết Nối Thị Trường',
+    'about.title': 'Nông Sản Việt | Kết Nối Thị Trường',
     'about.body': 'SGF Sourcing là nhà xuất khẩu nông sản Việt Nam với hơn 10 năm kinh nghiệm kết nối những thu hoạch tinh tuý nhất của Đồng Bằng Sông Cửu Long với các nhà nhập khẩu trên toàn thế giới. Trụ sở tại TP.HCM với quyền tiếp cận trực tiếp Bến Tre và Long An — vùng dừa trọng điểm của Việt Nam — chúng tôi kết hợp chuyên môn nguồn cung địa phương sâu sắc với việc tuân thủ tiêu chuẩn quốc tế.',
 
     /* ===== Leadership / Cris portrait (about.html) ===== */
@@ -212,7 +212,7 @@ window.SGF_I18N = {
     'brandstory.3.lead': 'Cao cấp không nhất thiết phải đắt đỏ.',
     'brandstory.3.body': 'Chúng tôi làm việc trực tiếp với nông trại — không trung gian, không phí đấu giá. Điều đó giữ giá trung thực. Cái chúng tôi thêm vào là độ tin cậy: chứng nhận GlobalGAP và HACCP, chuỗi lạnh kéo dài 60 ngày, và đội ngũ kinh doanh phản hồi trong 24 giờ. Khách hàng quay lại không phải vì chúng tôi rẻ nhất, mà vì họ không bao giờ phải đuổi theo chúng tôi. Một thương hiệu cao cấp, theo định nghĩa của chúng tôi, đơn giản là làm đúng điều đã hứa.',
     'brandstory.4.h': 'Kết nối thị trường, giữ vững gốc rễ',
-    'brandstory.4.lead': 'Khẩu hiệu của chúng tôi là "Vietnam Agriculture · Connecting Markets" — cả hai vế đều quan trọng.',
+    'brandstory.4.lead': 'Khẩu hiệu của chúng tôi là "Viet Agriculture | Connecting Markets" — cả hai vế đều quan trọng.',
     'brandstory.4.body': 'Mỗi container chúng tôi xuất là một nhịp cầu nhỏ giữa người nông dân vùng Đồng Bằng Sông Cửu Long và người mua nước ngoài. Chúng tôi tự hào đi trên nhịp cầu đó theo cả hai hướng: đưa thu hoạch Việt Nam ra thế giới, và đưa tiêu chuẩn thế giới về thực hành của nông dân chúng tôi. Đó là cách một quốc gia xuất khẩu nhiều hơn chỉ một sản phẩm — nó xuất khẩu uy tín. Chúng tôi hy vọng tiếp tục xây dựng uy tín ấy thêm năm mươi năm nữa.',
     'brandstory.cta.title': 'Muốn trở thành một phần của chương tiếp theo?',
     'brandstory.cta.body': 'Trao đổi với chúng tôi về sản lượng, thương hiệu, hoặc đơn giản là một container mẫu. Chúng tôi phản hồi trong 24 giờ.',

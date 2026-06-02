@@ -199,10 +199,43 @@
     });
   }
 
-  /* ----- 6. INIT ------------------------------------------------------ */
-  // Note: the previous version of this file injected a "Menu" hamburger
-  // toggle because the nav had 11+ items. The nav was trimmed to 6 items
-  // on May 16 2026; items are now rendered inline by CSS — no toggle needed.
+  /* ----- 6. MOBILE NAV (hamburger dropdown) --------------------------- */
+  // CSS hides the inline nav and shows a .nav-menu-toggle button below 820px.
+  // This injects the button into each page's primary nav and wires up
+  // open/close behaviour (click, outside click, link click, Escape).
+  function bindMobileNav() {
+    const primaryNav = document.querySelector('header.nav nav[aria-label="Primary"]');
+    const links = primaryNav && primaryNav.querySelector('.nav-links');
+    if (!primaryNav || !links) return;
+    if (primaryNav.querySelector('.nav-menu-toggle')) return;
+
+    if (!links.id) links.id = 'sgf-primary-menu';
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nav-menu-toggle';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', links.id);
+    button.setAttribute('aria-label', 'Open menu');
+    button.innerHTML =
+      '<span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>' +
+      '<span class="menu-label" data-i18n="nav.menu">Menu</span>';
+
+    primaryNav.insertBefore(button, links);
+
+    const open  = () => { button.setAttribute('aria-expanded', 'true');  links.classList.add('is-open'); };
+    const close = () => { button.setAttribute('aria-expanded', 'false'); links.classList.remove('is-open'); };
+    const toggle = () => (button.getAttribute('aria-expanded') === 'true' ? close() : open());
+
+    button.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+    links.addEventListener('click', (e) => { if (e.target.closest('a')) close(); });
+    document.addEventListener('click', (e) => { if (!primaryNav.contains(e.target)) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    // Close automatically if the viewport grows past the mobile breakpoint
+    window.addEventListener('resize', () => { if (window.innerWidth > 820) close(); });
+  }
+
+  /* ----- 7. INIT ------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
     setLang(getInitialLang());
     bindLangToggles();
@@ -210,5 +243,6 @@
     bindReveals();
     bindForm();
     bindCarousels();
+    bindMobileNav();
   });
 })();
