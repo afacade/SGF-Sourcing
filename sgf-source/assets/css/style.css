@@ -2403,3 +2403,198 @@ section { padding: var(--space-7) 0; }
   .article-body { font-size: 16px; }
   .article-callout { font-size: 16px; }
 }
+
+/* =========================================================================
+   22. PRODUCT CATALOGUE — sticky category rail + expanding spec rows
+   Used by /product/. Nineteen products across seven categories: every row
+   shows its headline specification collapsed, and opens to the full
+   description and spec table. Built from <details>/<summary> so it is
+   keyboard- and screen-reader-operable with no JavaScript.
+   ========================================================================= */
+.catalogue { background: var(--surface-section); }
+.cat-wrap {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  margin-top: var(--space-5);
+}
+
+/* ----- sticky category index ----- */
+.cat-rail { position: sticky; top: calc(var(--nav-h, 175px) + 24px); }
+.cat-rail h4 {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-squirrel);
+  border-bottom: 1px solid var(--color-silk);
+  padding-bottom: 10px;
+  margin: 0 0 12px;
+}
+.cat-rail ol { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
+.cat-rail li a {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+  color: var(--brown-judge);
+}
+.cat-rail li a b {
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--color-squirrel);
+  font-variant-numeric: tabular-nums;
+}
+.cat-rail li a:hover,
+.cat-rail li a.is-current { color: var(--color-graphite); }
+.cat-rail li a.is-current b { color: var(--brown-coffee); }
+
+/* ----- category header ----- */
+.cat-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 16px;
+  border-bottom: 1px solid var(--color-graphite);
+  padding-bottom: 10px;
+  margin: var(--space-6) 0 0;
+  scroll-margin-top: calc(var(--nav-h, 175px) + 16px);
+}
+.cat-group:first-child { margin-top: 0; }
+.cat-group h2 { font-size: clamp(22px, 2.4vw, 30px); margin: 0; }
+.cat-group span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--brown-coffee);
+  text-align: right;
+}
+
+/* ----- one product ----- */
+.cat-item { border-bottom: 1px solid var(--color-silk); }
+.cat-item > summary {
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding: 18px var(--space-2) 18px 0;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.2s ease;
+}
+.cat-item > summary::-webkit-details-marker { display: none; }
+.cat-item > summary:hover { background: var(--color-linen); }
+.cat-item > summary:focus-visible {
+  outline: 2px solid var(--color-graphite);
+  outline-offset: -2px;
+}
+.cat-thumb {
+  width: 84px;
+  height: 64px;
+  object-fit: cover;
+  filter: saturate(0.9);
+}
+.cat-name { min-width: 0; }
+.cat-name strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-graphite);
+}
+.cat-name em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--brown-coffee);
+}
+.cat-name small {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-squirrel);
+}
+.cat-chev {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-squirrel);
+  transition: transform 0.25s ease;
+}
+.cat-item[open] .cat-chev { transform: rotate(45deg); }
+
+/* ----- expanded detail ----- */
+.cat-detail {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-4);
+  padding: 0 0 var(--space-5);
+}
+.cat-detail figure { margin: 0; }
+.cat-detail figure img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  filter: saturate(0.92);
+}
+.cat-detail p {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--brown-judge);
+  margin: 0 0 var(--space-3);
+}
+.cat-dl { margin: 0 0 var(--space-3); border-top: 1px solid var(--color-silk); }
+.cat-dl > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: var(--space-2);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-silk);
+}
+.cat-dl dt {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-squirrel);
+  padding-top: 2px;
+}
+.cat-dl dd {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--brown-judge);
+}
+.cat-quote {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--color-graphite);
+  color: var(--color-porcelain);
+  padding: 12px 24px;
+  transition: background 0.2s ease;
+}
+.cat-quote:hover { background: var(--brown-judge); color: var(--color-porcelain); }
+
+@media (max-width: 900px) {
+  .cat-wrap { grid-template-columns: 1fr; gap: var(--space-4); }
+  .cat-rail { position: static; }
+  .cat-rail ol { display: flex; flex-wrap: wrap; gap: 2px 18px; }
+  .cat-rail li a { padding: 4px 0; }
+  .cat-detail { grid-template-columns: 1fr; }
+  .cat-dl > div { grid-template-columns: 1fr; gap: 3px; }
+}
+@media (max-width: 560px) {
+  .cat-item > summary { grid-template-columns: 64px 1fr auto; gap: var(--space-2); }
+  .cat-thumb { width: 64px; height: 52px; }
+  .cat-name strong { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cat-chev { transition: none; }
+}

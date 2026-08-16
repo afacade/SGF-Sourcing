@@ -235,7 +235,21 @@
     window.addEventListener('resize', () => { if (window.innerWidth > 820) close(); });
   }
 
-  /* ----- 7. INIT ------------------------------------------------------ */
+  /* ----- 7. NAV HEIGHT VARIABLE ---------------------------------------
+     The nav is sticky and its height changes with the breakpoint (the logo
+     shrinks on mobile). Publish it as --nav-h so anything else that sticks —
+     the product catalogue rail, for one — can clear it without hard-coding. */
+  function trackNavHeight() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const publish = () =>
+      root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    publish();
+    if ('ResizeObserver' in window) new ResizeObserver(publish).observe(nav);
+    else window.addEventListener('resize', publish);
+  }
+
+  /* ----- 8. INIT ------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
     setLang(getInitialLang());
     bindLangToggles();
@@ -244,5 +258,6 @@
     bindForm();
     bindCarousels();
     bindMobileNav();
+    trackNavHeight();
   });
 })();
